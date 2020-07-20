@@ -1,6 +1,5 @@
 #!/bin/bash
 
-mkdir /workspace/<user>/input
 cd /workspace/<user>/input
 
 cat $1 | while read line;
