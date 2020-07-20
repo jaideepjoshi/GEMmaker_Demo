@@ -82,5 +82,5 @@ apt-get update
 apt-get install nano
 nano install.sh
 ```
-Copy the contents of the install.sh script in this repo into this file within your pod. 
+Copy the contents of the install.sh script in this repo into this file within your pod. Be sure to change the <user> parameter to your username. This file will execute the fastq-dump command from the batch of SRAtoolkit executables and download all 36 pairs of fastq files onto your storage claim. In order to 
 
