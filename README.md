@@ -107,7 +107,7 @@ In the end, you should have 72 fastq files from 36 paired-end samples. The `refe
   -SraAccList.txt
 ```
 
-At last, the inputs for GEMmaker are ready within our K8s cluster. We can now configure our nextflow.config file and submit our workflow. Exit from the interactive pod and return to the bash terminal within the TACC cluster. We will submit our workflow from the `workspace/<user>/GEMmaker` directory. 
+At last, the inputs for GEMmaker are ready within our K8s cluster. We can now configure our nextflow.config file and submit our workflow. Exit from the interactive pod and return to the bash terminal within the TACC cluster. We will submit our workflow from the `workspace/<user>/GEMmaker` directory. In this directory is a default `nextflow.config` file, however this will need to be edited for several parameters. For more info about altering the GEMmaker config file, see the [documentation](https://gemmaker.readthedocs.io/en/latest/). 
   
   
   
