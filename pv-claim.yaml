@@ -1,0 +1,11 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: rodeo-pvc
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: cephfs
+  resources:
+    requests:
+      storage: 2Ti
