@@ -35,8 +35,14 @@ Finally, we need to edit dtp to access our newly mounted pvc...
 nano /home/<user>/dtp/helm/values.yaml
 ```
 * Set SRAtoolkit enabled to `true`
-* Set ExistingPVC to `true` and provide the name of your espablished pvc
+* Set ExistingPVC to `true` and provide the name of your established pvc
 
 ## Prepping GEMmaker prerequisites
+The GEMmaker [repository](https://github.com/SystemsGenetics/GEMmaker) and [documentation](https://gemmaker.readthedocs.io/en/latest/) should be followed along these specific parameters. GEMmaker requires fastq input files which will be compiled into a gene expression matrix (GEM). In order to do this, we must download the fastq files from their source and install a reference genome by which GEMmaker can align the transcription data.
+
+First, we must prepare our genome data for GEMmaker to use. This data can be directly downloaded from [Ensembl](https://useast.ensembl.org/Homo_sapiens/Info/Index). We need:
+* A [FASTA](ftp://ftp.ensembl.org/pub/release-100/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz) file containing the full genomic sequence in FASTA format (either pseudomolecules or scaffolds)
+** We will use the entire DNA primary assembly from the GRCh38 build of the human genome
+* A [GTF](ftp://ftp.ensembl.org/pub/release-100/gtf/homo_sapiens/Homo_sapiens.GRCh38.100.chr.gtf.gz) file containing the gene models.
 
 
