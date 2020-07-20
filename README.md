@@ -30,3 +30,13 @@ mv helm-v3.3.0-rc.1-linux-amd64/helm ..
 curl -s https://get.nextflow.io | bash
 nextflow run hello
 ```
+Finally, we need to edit dtp to access our newly mounted pvc...
+```
+nano /home/<user>/dtp/helm/values.yaml
+```
+* Set SRAtoolkit enabled to `true`
+* Set ExistingPVC to `true` and provide the name of your espablished pvc
+
+## Prepping GEMmaker prerequisites
+
+
