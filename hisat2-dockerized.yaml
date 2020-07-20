@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gm-k8s
+  labels:
+    app: gm-k8s
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gm-k8s
+  template:
+    metadata:
+      labels:
+        app: gm-k8s
+    spec:
+      containers:               
+      - name: gm-k8s
+        image: gemmaker/hisat2:2.1.0-1.1
+        command: [ "/bin/bash", "-c", "--" ]
+        args: [ "tail -f /dev/null" ]
+        resources:
+          requests:
+            cpu: 1
+            memory: 64Gi
+          limits:
+            cpu: 1
+            memory: 64Gi
+        volumeMounts:
+        - name: vol-1
+          mountPath: /workspace
+      restartPolicy: Always
+      volumes:
+        - name: vol-1
+          persistentVolumeClaim:
+            claimName: rodeo-pvc # Enter valid PVC
