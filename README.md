@@ -88,7 +88,7 @@ mkdir /workspace/<user>/input
 nano /workspace/<user>/input/SraAccList.txt
 ```
 
-Now exit the dtp-base pod by simply running `exit`. We will re-enter the dtp-sra-toolkit to download our fastq inputs. This can be done using the background feature of dtp, however we will do it interactively to follow the output and send it to an output file
+Now exit the dtp-base pod by simply running `exit`. We will re-enter the dtp-sra-toolkit to download our fastq inputs. This can be done using the background feature of dtp, however we will do it interactively to follow the output and send it to an output file. Be sure to leave this interactive terminal up and running until the data transfer completes.
 ```
 cd /workspace/<user>/misc
 chmod +x install.sh
@@ -107,7 +107,7 @@ In the end, you should have 72 fastq files from 36 paired-end samples. The `refe
   -SraAccList.txt
 ```
 
-
+At last, the inputs for GEMmaker are ready within our K8s cluster. We can now configure our nextflow.config file and submit our workflow. Exit from the interactive pod and return to the bash terminal within the TACC cluster. We will submit our workflow from the `workspace/<user>/GEMmaker` directory. 
   
   
   
