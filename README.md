@@ -44,7 +44,28 @@ First, we must prepare our genome data for GEMmaker to use. This data can be dir
 * A FASTA file containing the full genomic sequence in FASTA format (either pseudomolecules or scaffolds)
 * A GTF file containing the gene models
 
-In order to index our reference genome we need access to the hisat2 binaries within a container on our k8s cluster. We will create a k8s deployment which we can then exec into to access a bash terminal with hisat2 software tools and access to our pvc. Create a new directory for docker yaml files `/home/user/dockerized/hisat2-dockerized.yaml`
+In order to index our reference genome we need access to the hisat2 binaries within a container on our k8s cluster. We will create a k8s deployment which we can then exec into to access a bash terminal with hisat2 software tools and access to our pvc. Create a new directory for docker yaml files `/home/user/dockerized/hisat2-dockerized.yaml`. The `claimName` parameter should be set to the valid pvc configured for your namespace
+
+```
+kubectl apply -f /home/<user>/dockerized/hisat2-deployment.yaml
+kubectl get pods
+```
+Once you see a pod with `gm-k8s-*` and a status of `ready`, we're cooking with peanut oil. We will now exec into this k8s pod to use hisat2 to index our reference genome.
+```
+kubectl exec -ti <pod name> -- /bin/bash
+```
+Once you have access to a bash terminal, access your workspace by `cd /workspace/<user>`. We will now begin prepping our GEMmaker inputs by downloading the ensembl fasta and gtf files and indexing our genome. In the course of the following commands, we download and unpack the fasta and gtf files, index the genome with the name `Homo_Sapiens`, and create this index directory.
+```
+mkdir /workspace/<user>/references | cd /workspace/<user>/references
+wget ftp://ftp.ensembl.org/pub/release-100/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz
+gunzip Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz
+wget ftp://ftp.ensembl.org/pub/release-100/gtf/homo_sapiens/Homo_sapiens.GRCh38.100.chr.gtf.gz
+gunzip Homo_sapiens.GRCh38.100.chr.gtf.gz
+hisat2-build -f Homo_sapiens.GRCh38.dna.primary_assembly.fa Homo_Sapiens
+mkdir /workspace/<user>/references/Homo_Sapiens
+mv /workspace/<user>/references/*ht2 /workspace/<user>/references/Homo_Sapiens
+```
+
 
 
 
