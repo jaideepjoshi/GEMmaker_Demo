@@ -107,7 +107,11 @@ In the end, you should have 72 fastq files from 36 paired-end samples. The `refe
   -SraAccList.txt
 ```
 
-At last, the inputs for GEMmaker are ready within our K8s cluster. We can now configure our nextflow.config file and submit our workflow. Exit from the interactive pod and return to the bash terminal within the TACC cluster. We will submit our workflow from the `workspace/<user>/GEMmaker` directory. In this directory is a default `nextflow.config` file, however this will need to be edited for several parameters. For more info about altering the GEMmaker config file, see the [documentation](https://gemmaker.readthedocs.io/en/latest/). 
+At last, the inputs for GEMmaker are ready within our K8s cluster. We can now configure our nextflow.config file and submit our workflow. Exit from the interactive pod and return to the bash terminal within the TACC cluster. We will submit our workflow from the `workspace/<user>/GEMmaker` directory. In this directory is a default `nextflow.config` file, however this will need to be edited for several parameters. For more info about altering the GEMmaker config file, see the [documentation](https://gemmaker.readthedocs.io/en/latest/). A revised config file for this GEMmaker run has been included in this repository as `nextflow.config`. Once this has been editted, we can run the ultimate command:
+```
+(time nextflow -C nextflow.config kuberun SystemsGetics/GEMmaker -v rodeo-pvc) > rodeo_OUT.txt 2>&1 &
+```
+This will record the time of the run in the output, redirect stdout to `rodeo_OUT.txt`, and push the job to the background. You must leave your terminal running because your rodeo access is secured through ssh connection. Closing out of your connection will kill the run.  
   
   
   
