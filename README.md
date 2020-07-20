@@ -37,7 +37,7 @@ nano /home/<user>/dtp/helm/values.yaml
 * Set SRAtoolkit enabled to `true`
 * Set ExistingPVC to `true` and provide the name of your established pvc
 
-## Prepping GEMmaker prerequisites
+## Prepping GEMmaker's reference genome
 The GEMmaker [repository](https://github.com/SystemsGenetics/GEMmaker) and [documentation](https://gemmaker.readthedocs.io/en/latest/) should be followed along these specific parameters. GEMmaker requires fastq input files which will be compiled into a gene expression matrix (GEM). In order to do this, we must download the fastq files from their source and install a reference genome by which GEMmaker can align the transcription data.
 
 First, we must prepare our genome data for GEMmaker to use. This data can be directly downloaded from [Ensembl](https://useast.ensembl.org/Homo_sapiens/Info/Index). We will use the entire DNA primary assembly from the GRCh38 build of the human genome. We need:
@@ -65,7 +65,22 @@ hisat2-build -f Homo_sapiens.GRCh38.dna.primary_assembly.fa Homo_Sapiens
 mkdir /workspace/<user>/references/Homo_Sapiens
 mv /workspace/<user>/references/*ht2 /workspace/<user>/references/Homo_Sapiens
 ```
+This reference genome is prepped and ready to be used for our GEMmaker run. 
 
-
-
+## Downloading input fastq data
+We will use [SRA-kidney](https://www.ncbi.nlm.nih.gov/bioproject/359795) data for the construction of our GEM. This data consists of 36 paired-end fastq files of non-tumor kidney tissues from 36 patients undergoing nephrectomy for exploring the metabolic mechanism of sorafenib and identifying the major transcriptional regulation factors in sorafenib metabolism in kidney. Due to the total size of this data (0.16Tb), we will use a more efficient method of data transfer than generic scp transfer. The SRAtoolkit allows for containerized data transfer within HPC clusters, which is why we set this to `true` in the values.yaml file for dtp. The data transfer pod makes this transfer easy. 
+```
+cd /workspace/<user>/dtp
+./start
+./interact
+```
+This starts the data transfer pod, which we will essentially exec into. Once a bash terminal has started, select `1` to enter the dtp-base pod. We will not have access to the SRAtoolkit executables, however we can configure our environment to make the data transfer easy.
+```
+cd workspace/<user>
+mkdir workspace/<user>/misc | cd workspace/<user>/misc
+apt-get update
+apt-get install nano
+nano install.sh
+```
+Copy the contents of the install.sh script in this repo into this file within your pod. 
 
