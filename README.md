@@ -88,7 +88,26 @@ mkdir /workspace/<user>/input
 nano /workspace/<user>/input/SraAccList.txt
 ```
 
-Now exit the dtp-base pod by simply running `exit`. We will re-enter the dtp-sra-toolkit to download our fastq inputs. 
+Now exit the dtp-base pod by simply running `exit`. We will re-enter the dtp-sra-toolkit to download our fastq inputs. This can be done using the background feature of dtp, however we will do it interactively to follow the output and send it to an output file
+```
+cd /workspace/<user>/misc
+chmod +x install.sh
+./install.sh SraAccList.txt > dtp_out.txt
+```
+In the end, you should have 72 fastq files from 36 paired-end samples. The `references` directory should now be moved into the `input` directory. There should also be a `samples2skip.txt` file that should be empty, so just put a space in the file. In the end, this should be your directory structure...
+```
+-input/
+  -references/
+      -Homo_Sapiens/
+        -*.ht2
+      -*.fa
+      -*.gtf
+  -samples2skip.txt
+  -*.fastq
+  -SraAccList.txt
+```
+
+
   
   
   
