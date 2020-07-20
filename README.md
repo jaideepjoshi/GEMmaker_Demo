@@ -76,11 +76,23 @@ cd /workspace/<user>/dtp
 ```
 This starts the data transfer pod, which we will essentially exec into. Once a bash terminal has started, select `1` to enter the dtp-base pod. We will not have access to the SRAtoolkit executables, however we can configure our environment to make the data transfer easy.
 ```
-cd workspace/<user>
-mkdir workspace/<user>/misc | cd workspace/<user>/misc
+cd /workspace/<user>
+mkdir /workspace/<user>/misc | cd /workspace/<user>/misc
 apt-get update
 apt-get install nano
 nano install.sh
 ```
-Copy the contents of the install.sh script in this repo into this file within your pod. Be sure to change the <user> parameter to your username. This file will execute the fastq-dump command from the batch of SRAtoolkit executables and download all 36 pairs of fastq files onto your storage claim. In order to do this, we need a list of SRA accession IDs. This is copied in this repo as `SraAccList.txt`, however you should download it for yourself and copy the results. It can be downloaded locally [here](https://www.ncbi.nlm.nih.gov/sra?linkname=bioproject_sra_all&from_uid=359795) by clicking the 'send to' link and going to 'file', then downloading the Accession List format. Create a new file `workspace/<user>/input/SraAccList.txt` and copy the results of this query into it. 
+Copy the contents of the install.sh script in this repo into this file within your pod. Be sure to change the <user> parameter to your username. This file will execute the fastq-dump command from the batch of SRAtoolkit executables and download all 36 pairs of fastq files onto your storage claim. In order to do this, we need a list of SRA accession IDs. This is copied in this repo as `SraAccList.txt`, however you should download it for yourself and copy the results. It can be downloaded locally [here](https://www.ncbi.nlm.nih.gov/sra?linkname=bioproject_sra_all&from_uid=359795) by clicking the 'send to' link and going to 'file', then downloading the Accession List format. Create a new file and copy the results of this query into it. 
+```
+mkdir /workspace/<user>/input
+nano /workspace/<user>/input/SraAccList.txt
+```
 
+Now exit the dtp-base pod by simply running `exit`. We will re-enter the dtp-sra-toolkit to download our fastq inputs. 
+  
+  
+  
+  
+  
+  
+  
